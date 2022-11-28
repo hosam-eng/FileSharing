@@ -1,0 +1,3 @@
+[user]
+    name = Bob Gilmore
+    email = me@mydomain.com

@@ -1,0 +1,45 @@
+﻿@inject IViewLocalizer localizer;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+	<h1>@localizer["Search Files"]</h1>
+
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-md-5">
+				<form asp-controller="Uploads" asp-action="Result">
+					<div class="input-group input-group-lg mb-5">
+						<input type="text" class="form-control" name="Term" placeholder="@localizer["File Name"]" aria-label="Recipient's username" aria-describedby="button-addon2">
+					<div class="input-group-append">
+							<button class="btn btn-outline-primary" type="submit" id="button-addon2">@localizer["Search"]</button>
+					</div>
+				</div>
+			</form>
+			</div>
+			<div class="col-md-12 text-center" style="margin-top:40px">
+				<h1>@localizer["Popular"]</h1>
+				<hr/>
+				<table class="table">
+					<tbody>
+					@foreach(var item in ViewBag.Popular)
+					{
+						<tr>
+								<td>
+									@if (item.ContentType.ToLower().StartsWith("image"))
+									{
+							<img src="~/Uploads/@item.FileName" width="70" height="70" class="img-thumbnail" alt="alternate Text">
+									}
+					        </td>
+							<td>@item.OriginalName</td>
+								<td>@localizer["Downloads"] : @item.DownloadCount</td>
+						</tr>
+					}
+				</tbody>
+
+				</table>
+				</div>
+		</div>
+	</div>
+</div>

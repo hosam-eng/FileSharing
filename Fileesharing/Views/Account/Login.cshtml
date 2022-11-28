@@ -1,0 +1,72 @@
+﻿@model Fileesharing.Models.LoginViewModel
+@inject IViewLocalizer localizer;
+@{
+	ViewData["Title"] = "Login";
+}
+
+
+<section id="mu-contact">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="mu-contact-area">
+					<!-- Title -->
+					<div class="row">
+						<div class="col-md-12">
+							<div class="mu-title">
+								<h2>@localizer["Title"]</h2>
+							</div>
+						</div>
+					</div>
+					<!-- Start Login Content -->
+					<div class="mu-contact-content">
+						<div class="row">
+
+							<div class="col-md-12">
+								<div class="mu-contact-form-area" style="padding-top:0px">
+									<div id="form-messages"></div>
+									<form method="post" class="mu-contact-form" asp-action="Login" asp-controller="Account" asp-route-ReturnUrl="@Context.Request.Query["ReturnUrl"]">
+										<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+										<div class="form-group">
+											<span class="fa fa-user mu-contact-icon"></span>
+											<input asp-for="Email" type="email" class="form-control" placeholder="@localizer["Email"]" id="email" required>
+											<span asp-validation-for="Email"></span>
+										</div>
+
+										<div class="form-group">
+											<span class="fa fa-envelope mu-contact-icon"></span>
+											<input asp-for="Password" type="password" class="form-control" placeholder="@localizer["Password"]" id="password" required>
+											<span asp-validation-for="Password"></span>
+										</div>
+
+
+										<button type="submit" class="mu-send-msg-btn"><span>@localizer["Submit"]</span></button>
+									</form>
+								</div>
+							</div>
+								<div class="col-12" style="margin-top:10px;">
+									<div class="mu-social-media">
+										<a asp-action="ExternalLogin" asp-route-Provider="Facebook" asp-controller="Account"><i class="fa fa-facebook"></i></a>
+										<a asp-action="ExternalLogin" asp-route-Provider="Google" asp-controller="Account"><i class="fa fa-google"></i></a>
+									</div>
+								<div>
+									<a asp-action="ForgotPassword" asp-controller="Account">@localizer["ForgotPassword"]</a>
+								</div>
+								</div>
+								
+						</div>
+					</div>
+					<!-- End Login Content -->
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+    }
